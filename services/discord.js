@@ -54,7 +54,7 @@ class Discord {
         const percentChange = data.market_data.price_change_percentage_24h.toFixed(5);
 
         // Update the bot's nickname
-        bot.setNickname(`ZBC $${price}`);
+        bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
 
         // Update the bot's activity
         bot.user.setActivity(`% 24H = ${percentChange}%`, { type: 'WATCHING' });
