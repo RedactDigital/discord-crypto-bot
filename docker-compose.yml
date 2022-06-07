@@ -1,0 +1,21 @@
+# Initializes a new nodejs project with docker
+
+version: '3.7'
+services:
+  app:
+    image: node:18.0.0
+    user: 1000:1000
+    container_name: discord-bot
+    restart: unless-stopped
+    working_dir: /var/www
+    command: bash -c "npm install --no-audit && npm start"
+    ports:
+      - '${PORT}:${PORT}'
+    volumes:
+      - ./:/var/www
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
