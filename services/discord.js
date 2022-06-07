@@ -50,8 +50,8 @@ class Discord {
           sparkline: false,
         });
 
-        const price = data.market_data.current_price.usd.toFixed(8);
-        const percentChange = data.market_data.price_change_percentage_24h.toFixed(5);
+        const price = data.market_data.current_price.usd.toFixed(5);
+        const percentChange = data.market_data.price_change_percentage_24h.toFixed(4);
 
         // Update the bot's nickname
         bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
