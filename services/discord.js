@@ -48,7 +48,11 @@ class Discord {
           community_data: false,
           developer_data: false,
           sparkline: false,
+        }).catch(e => {
+          log.error('Error2: ', e);
         });
+
+        if(!data) return;
 
         const price = data.market_data.current_price.usd.toFixed(5);
         const percentChange = data.market_data.price_change_percentage_24h.toFixed(4);
@@ -73,7 +77,10 @@ class Discord {
         community_data: false,
         developer_data: false,
         sparkline: false,
+      }).catch(e => {
+        log.error('Error2: ', e);
       });
+      if(!data) return;
       await bot.user.setAvatar(data.image.large);
     } catch (error) {
       log.error('Error getting value: ', error);
