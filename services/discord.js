@@ -1,5 +1,6 @@
 const { Client, Intents } = require('discord.js');
 const crypto = require('coingecko-api');
+const { ActivityTypes } = require('discord.js/typings/enums');
 const Cron = require('cron').CronJob;
 
 class Discord {
@@ -42,17 +43,19 @@ class Discord {
 
       const job = new Cron('* * * * *', async () => {
         // Get coin data
-        const { data } = await client.coins.fetch(coinId, {
-          tickers: false,
-          market_data: true,
-          community_data: false,
-          developer_data: false,
-          sparkline: false,
-        }).catch(e => {
-          log.error('Error2: ', e);
-        });
+        const { data } = await client.coins
+          .fetch(coinId, {
+            tickers: false,
+            market_data: true,
+            community_data: false,
+            developer_data: false,
+            sparkline: false,
+          })
+          .catch(e => {
+            log.error('Error2: ', e);
+          });
 
-        if(!data) return;
+        if (!data) return;
 
         const price = data.market_data.current_price.usd.toFixed(5);
         const percentChange = data.market_data.price_change_percentage_24h.toFixed(4);
@@ -61,7 +64,7 @@ class Discord {
         bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
 
         // Update the bot's activity
-        bot.user.setActivity(`% 24H = ${percentChange}%`, { type: 'WATCHING' });
+        bot.user.setActivity(`% 24H = ${percentChange}%`, { type: ActivityTypes.WATCHING });
 
         log.info(`Updated price to ${price}`);
         log.info(`Updated % 24H to ${percentChange}%`);
@@ -71,16 +74,18 @@ class Discord {
 
       // Update the bot's avatar
       // Get coin data for the avatar (Discord only allows 2 updates every 10 min so this is outside the cronjob)
-      const { data } = await client.coins.fetch(coinId, {
-        tickers: false,
-        market_data: false,
-        community_data: false,
-        developer_data: false,
-        sparkline: false,
-      }).catch(e => {
-        log.error('Error2: ', e);
-      });
-      if(!data) return;
+      const { data } = await client.coins
+        .fetch(coinId, {
+          tickers: false,
+          market_data: false,
+          community_data: false,
+          developer_data: false,
+          sparkline: false,
+        })
+        .catch(e => {
+          log.error('Error2: ', e);
+        });
+      if (!data) return;
       await bot.user.setAvatar(data.image.large);
     } catch (error) {
       log.error('Error getting value: ', error);
