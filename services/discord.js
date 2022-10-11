@@ -1,6 +1,5 @@
 const { Client, Intents } = require('discord.js');
 const crypto = require('coingecko-api');
-const { ActivityTypes } = require('discord.js/typings/enums');
 const Cron = require('cron').CronJob;
 
 class Discord {
@@ -64,7 +63,7 @@ class Discord {
         bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
 
         // Update the bot's activity
-        bot.user.setActivity(`% 24H = ${percentChange}%`, { type: ActivityTypes.WATCHING });
+        bot.user.setActivity(`% 24H = ${percentChange}%`, { type: 'WATCHING' });
 
         log.info(`Updated price to ${price}`);
         log.info(`Updated % 24H to ${percentChange}%`);
