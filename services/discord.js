@@ -40,7 +40,7 @@ class Discord {
       // Find the coin based on the symbol in env
       const coinId = coins.data.find(coin => coin.symbol == process.env.SYMBOL).id;
 
-      const job = new Cron('* * * * *', async () => {
+      const job = new Cron('*/3 * * * *', async () => {
         try {
           // Get coin data
           const { data } = await client.coins
