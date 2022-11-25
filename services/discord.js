@@ -41,32 +41,36 @@ class Discord {
       const coinId = coins.data.find(coin => coin.symbol == process.env.SYMBOL).id;
 
       const job = new Cron('* * * * *', async () => {
-        // Get coin data
-        const { data } = await client.coins
-          .fetch(coinId, {
-            tickers: false,
-            market_data: true,
-            community_data: false,
-            developer_data: false,
-            sparkline: false,
-          })
-          .catch(e => {
-            log.error('Error2: ', e);
-          });
+        try {
+          // Get coin data
+          const { data } = await client.coins
+            .fetch(coinId, {
+              tickers: false,
+              market_data: true,
+              community_data: false,
+              developer_data: false,
+              sparkline: false,
+            })
+            .catch(e => {
+              log.error('Error0: ', e);
+            });
 
-        if (!data) return;
+          if (!data) return;
 
-        const price = data.market_data.current_price.usd.toFixed(5);
-        const percentChange = data.market_data.price_change_percentage_24h.toFixed(4);
+          const price = data.market_data.current_price.usd.toFixed(5);
+          const percentChange = data.market_data.price_change_percentage_24h.toFixed(4);
 
-        // Update the bot's nickname
-        bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
+          // Update the bot's nickname
+          bot.setNickname(`${process.env.SYMBOL.toUpperCase()} $${price}`);
 
-        // Update the bot's activity
-        bot.user.setActivity(`% 24H = ${percentChange}%`, { type: 'WATCHING' });
+          // Update the bot's activity
+          bot.user.setActivity(`% 24H = ${percentChange}%`, { type: 'WATCHING' });
 
-        log.info(`Updated price to ${price}`);
-        log.info(`Updated % 24H to ${percentChange}%`);
+          log.info(`Updated price to ${price}`);
+          log.info(`Updated % 24H to ${percentChange}%`);
+        } catch (e) {
+          log.error('Error1: ', e);
+        }
       });
 
       await job.start();
