@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write .",
+    "lint": "prettier --check . && eslint --fix --ext .js --ignore-path .gitignore . && cspell '**/*'",
     "start": "nodemon app.js",
     "prod": "node app.js"
   },
@@ -14,19 +16,29 @@
     "axios": "^0.27.2",
     "coingecko-api": "^1.0.10",
     "cron": "^2.0.0",
+    "datadog-winston": "^1.5.1",
     "dayjs": "^1.11.3",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.1",
     "winston": "^3.7.2"
   },
   "devDependencies": {
-    "eslint": "^8.15.0",
+    "cspell": "^6.31.1",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.2.2",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^2.0.16",
-    "prettier": "^2.6.2"
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "semi": true,
+    "printWidth": 160,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always"
   }
 }

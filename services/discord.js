@@ -1,6 +1,8 @@
 const { Client, Intents } = require('discord.js');
-const crypto = require('coingecko-api');
+/* eslint-disable class-methods-use-this */
+const Crypto = require('coingecko-api');
 const Cron = require('cron').CronJob;
+const log = require('./log');
 
 class Discord {
   constructor() {
@@ -23,22 +25,20 @@ class Discord {
       log.info(`Disconnected`);
     });
 
-    this.discord.on('error', error => {
+    this.discord.on('error', (error) => {
       log.error(`Discord error: `, error);
     });
 
     this.discord.login(process.env.TOKEN);
-
-    return this.discord;
   }
 
   async _onReady(bot) {
     try {
-      const client = new crypto();
+      const client = new Crypto();
       // Get all coins from CoinGecko
       const coins = await client.coins.list();
       // Find the coin based on the symbol in env
-      const coinId = coins.data.find(coin => coin.symbol == process.env.SYMBOL).id;
+      const coinId = coins.data.find((coin) => coin.symbol === process.env.SYMBOL).id;
 
       const job = new Cron('*/3 * * * *', async () => {
         try {
@@ -51,7 +51,7 @@ class Discord {
               developer_data: false,
               sparkline: false,
             })
-            .catch(e => {
+            .catch((e) => {
               log.error('Error0: ', e);
             });
 
@@ -85,7 +85,7 @@ class Discord {
           developer_data: false,
           sparkline: false,
         })
-        .catch(e => {
+        .catch((e) => {
           log.error('Error2: ', e);
         });
       if (!data) return;
