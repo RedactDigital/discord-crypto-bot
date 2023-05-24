@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["sparkline"]
+  "cSpell.words": ["sparkline"],
+  "ansible.python.interpreterPath": "/bin/python3"
 }

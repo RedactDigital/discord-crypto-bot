@@ -1,0 +1,15 @@
+services:
+  crypto-bot:
+    image: node:19.8.1-alpine
+    working_dir: /var/www
+    command: sh -c "npm install --no-audit && npm run prod"
+    volumes:
+      - ./:/var/www
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      update_config:
+        parallelism: 1
+        delay: 10s
