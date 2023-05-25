@@ -10,7 +10,7 @@ class Discord {
     this.discord = new Client({ intents });
 
     this.discord.on('ready', () => {
-      log.info('Discord ready!');
+      log.info(`Discord ${process.env.SYMBOL} bot connected`);
       const guild = this.discord.guilds.cache.get(process.env.GUILD_ID);
       const bot = guild.members.cache.get(process.env.BOT_ID);
 
