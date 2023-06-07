@@ -7,12 +7,14 @@ const log = require('./log');
 class Discord {
   constructor() {
     const intents = [[Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILDS]];
+    const botIdEnv = `${process.env.SYMBOL.toLocaleUpperCase()}_BOT_ID`;
+    const tokenEnv = `${process.env.SYMBOL.toUpperCase()}_TOKEN`;
     this.discord = new Client({ intents });
 
     this.discord.on('ready', () => {
       log.info(`Discord ${process.env.SYMBOL} bot connected`);
       const guild = this.discord.guilds.cache.get(process.env.DISCORD_GUILD_ID);
-      const bot = guild.members.cache.get(`${process.env.SYMBOL.toLocaleUpperCase()}_BOT_ID`);
+      const bot = guild.members.cache.get(process.env[botIdEnv]);
 
       this._onReady(bot);
     });
@@ -29,7 +31,7 @@ class Discord {
       log.error(`Discord error: `, error);
     });
 
-    this.discord.login(`${process.env.SYMBOL.toUpperCase()}_TOKEN`);
+    this.discord.login(process.env[tokenEnv]);
   }
 
   async _onReady(bot) {
