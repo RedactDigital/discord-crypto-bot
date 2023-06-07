@@ -10,3 +10,5 @@ services:
     command: bash -c "npm install --no-audit && npm run start"
     volumes:
       - ./:/var/www
+    environment:
+      SYMBOL: sol
