@@ -12,8 +12,8 @@ services:
       - DISCORD_GUILD_ID
       - SOL_BOT_ID
       - SOL_BOT_TOKEN
-      - ZBC_BOT_ID
-      - ZBC_BOT_TOKEN
+      - BTC_BOT_ID
+      - BTC_BOT_TOKEN
       - ETH_BOT_ID
       - ETH_BOT_TOKEN
     deploy:
