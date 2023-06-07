@@ -26,6 +26,9 @@ services:
         delay: 10s
       placement:
         constraints:
+          - node.labels.crypto == true
+      placement:
+        constraints:
           - node.labels.service == ark-server
 
   crypto-bot-btc:
@@ -53,6 +56,9 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
+      placement:
+        constraints:
+          - node.labels.crypto == true
 
   crypto-bot-eth:
     image: node:20.0-bullseye-slim
@@ -79,6 +85,9 @@ services:
       update_config:
         parallelism: 1
         delay: 10s
+      placement:
+        constraints:
+          - node.labels.crypto == true
 
 secrets:
   DATADOG_API_KEY:
