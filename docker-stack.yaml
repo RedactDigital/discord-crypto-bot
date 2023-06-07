@@ -27,9 +27,6 @@ services:
       placement:
         constraints:
           - node.labels.crypto == true
-      placement:
-        constraints:
-          - node.labels.service == ark-server
 
   crypto-bot-btc:
     image: node:20.0-bullseye-slim
