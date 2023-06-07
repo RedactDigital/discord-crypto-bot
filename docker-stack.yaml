@@ -13,6 +13,8 @@ services:
       - DISCORD_GUILD_ID
       - SOL_BOT_ID
       - SOL_BOT_TOKEN
+      - ZBC_BOT_ID
+      - ZBC_BOT_TOKEN
     deploy:
       mode: replicated
       replicas: 1
@@ -34,6 +36,8 @@ services:
     secrets:
       - DATADOG_API_KEY
       - DISCORD_GUILD_ID
+      - SOL_BOT_ID
+      - SOL_BOT_TOKEN
       - ZBC_BOT_ID
       - ZBC_BOT_TOKEN
     deploy:
