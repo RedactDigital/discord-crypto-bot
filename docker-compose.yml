@@ -3,16 +3,10 @@
 version: '3.7'
 services:
   app:
-    image: node:19.8.1
-    container_name: discord-bot-${SYMBOL}
+    image: node:20.0-bullseye-slim
+    container_name: discord-bot
     restart: unless-stopped
     working_dir: /var/www
-    command: bash -c "npm install --no-audit && npm run prod"
+    command: bash -c "npm install --no-audit && npm run start"
     volumes:
       - ./:/var/www
-    networks:
-      - app
-
-networks:
-  app:
-    driver: bridge

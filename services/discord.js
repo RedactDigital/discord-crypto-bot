@@ -11,8 +11,8 @@ class Discord {
 
     this.discord.on('ready', () => {
       log.info(`Discord ${process.env.SYMBOL} bot connected`);
-      const guild = this.discord.guilds.cache.get(process.env.GUILD_ID);
-      const bot = guild.members.cache.get(process.env.BOT_ID);
+      const guild = this.discord.guilds.cache.get(process.env.DISCORD_GUILD_ID);
+      const bot = guild.members.cache.get(`${process.env.SYMBOL.toLocaleUpperCase()}_${process.env.BOT_ID}`);
 
       this._onReady(bot);
     });
@@ -29,7 +29,7 @@ class Discord {
       log.error(`Discord error: `, error);
     });
 
-    this.discord.login(process.env.TOKEN);
+    this.discord.login(`${process.env.SYMBOL.toUpperCase()}_${process.env.TOKEN}`);
   }
 
   async _onReady(bot) {
@@ -38,7 +38,7 @@ class Discord {
       // Get all coins from CoinGecko
       const coins = await client.coins.list();
       // Find the coin based on the symbol in env
-      const coinId = coins.data.find((coin) => coin.symbol === process.env.SYMBOL).id;
+      const coinId = coins.data.find((coin) => coin.symbol === process.env.SYMBOL.toLowerCase()).id;
 
       const job = new Cron('*/3 * * * *', async () => {
         try {
