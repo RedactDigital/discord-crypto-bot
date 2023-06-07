@@ -8,7 +8,7 @@ class Discord {
   constructor() {
     const intents = [[Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILDS]];
     const botIdEnv = `${process.env.SYMBOL.toLocaleUpperCase()}_BOT_ID`;
-    const tokenEnv = `${process.env.SYMBOL.toUpperCase()}_TOKEN`;
+    const tokenEnv = `${process.env.SYMBOL.toUpperCase()}BOT_TOKEN`;
     this.discord = new Client({ intents });
 
     this.discord.on('ready', () => {
