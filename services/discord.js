@@ -12,7 +12,7 @@ class Discord {
     this.discord.on('ready', () => {
       log.info(`Discord ${process.env.SYMBOL} bot connected`);
       const guild = this.discord.guilds.cache.get(process.env.DISCORD_GUILD_ID);
-      const bot = guild.members.cache.get(`${process.env.SYMBOL.toLocaleUpperCase()}_${process.env.BOT_ID}`);
+      const bot = guild.members.cache.get(`${process.env.SYMBOL.toLocaleUpperCase()}_BOT_ID`);
 
       this._onReady(bot);
     });
@@ -29,7 +29,7 @@ class Discord {
       log.error(`Discord error: `, error);
     });
 
-    this.discord.login(`${process.env.SYMBOL.toUpperCase()}_${process.env.TOKEN}`);
+    this.discord.login(`${process.env.SYMBOL.toUpperCase()}_TOKEN`);
   }
 
   async _onReady(bot) {
