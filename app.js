@@ -8,4 +8,4 @@ console.log(process.env[botIdEnv]);
 console.log(process.env[tokenEnv]);
 
 // eslint-disable-next-line no-new
-new Discord();
+// new Discord();
