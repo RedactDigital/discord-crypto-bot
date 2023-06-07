@@ -5,6 +5,7 @@ services:
     command: sh -c "chmod +x docker-secrets.sh && ./docker-secrets.sh && npm install --no-audit && npm run prod"
     volumes:
       - ./:/var/www
+      - /var/www/.env
     environment:
       SYMBOL: sol
     secrets:
@@ -27,6 +28,7 @@ services:
     command: sh -c "chmod +x docker-secrets.sh && ./docker-secrets.sh && npm install --no-audit && npm run prod"
     volumes:
       - ./:/var/www
+      - /var/www/.env
     environment:
       SYMBOL: zbc
     secrets:

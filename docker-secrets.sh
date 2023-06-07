@@ -4,11 +4,10 @@
 PATH_SECRETS=/run/secrets
 EXISTING_ENV_FILE=.env
 
-# If the .env file exists, stop the script and tell the user to remove it and try again
-# This way if we are testing the script, we don't accidentally overwrite the .env file
+# If the .env file exists, just exit without doing anything
 if [ -f "$EXISTING_ENV_FILE" ]; then
-    echo "The .env file already exists. Please remove it and try again."
-    exit 1
+    echo "The .env file already exists. Skipping."
+    exit 0
 fi
 
 if [ -d "$PATH_SECRETS" ]; then
